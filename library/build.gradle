@@ -1,11 +1,8 @@
 apply plugin: 'com.android.library'
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.+'
+    compile 'com.android.support:support-v4:22.0.0'
 }
-
-version = VERSION_NAME
-group = GROUP
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -19,5 +16,3 @@ android {
         abortOnError false
     }
 }
-
-apply from: 'https://raw.githubusercontent.com/denizmveli/gradle-mvn-push/master/gradle-mvn-push.gradle'
