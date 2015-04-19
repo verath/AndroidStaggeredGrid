@@ -1033,7 +1033,7 @@ public abstract class ExtendableListView extends AbsListView {
                 performClick.mClickMotionPosition = motionPosition;
                 performClick.rememberWindowAttachCount();
 
-                //            mResurrectToPosition = motionPosition;
+                final int clickPosition = motionPosition + mFirstPosition;
 
                 if (mTouchMode == TOUCH_MODE_DOWN || mTouchMode == TOUCH_MODE_TAP) {
                     final Handler handler = getHandler();
@@ -1042,7 +1042,7 @@ public abstract class ExtendableListView extends AbsListView {
                                 mPendingCheckForTap : mPendingCheckForLongPress);
                     }
                     mLayoutMode = LAYOUT_NORMAL;
-                    if (!mDataChanged && motionPosition >= 0 && mAdapter.isEnabled(motionPosition)) {
+                    if (!mDataChanged && mAdapter.isEnabled(clickPosition)) {
                         mTouchMode = TOUCH_MODE_TAP;
                         layoutChildren();
                         child.setPressed(true);
@@ -1061,7 +1061,7 @@ public abstract class ExtendableListView extends AbsListView {
                         mTouchMode = TOUCH_MODE_IDLE;
                     }
                     return true;
-                } else if (!mDataChanged && motionPosition >= 0 && mAdapter.isEnabled(motionPosition)) {
+                } else if (!mDataChanged && mAdapter.isEnabled(clickPosition)) {
                     post(performClick);
                 }
             }
