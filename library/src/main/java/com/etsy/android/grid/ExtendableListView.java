@@ -2824,13 +2824,14 @@ public abstract class ExtendableListView extends AbsListView {
 
             final ListAdapter adapter = mAdapter;
             final int motionPosition = mClickMotionPosition;
-            if (adapter != null && mItemCount > 0 &&
-                    motionPosition != INVALID_POSITION &&
-                    motionPosition < adapter.getCount() && sameWindow()) {
+            final int numHeaderViews = getHeaderViewsCount();
+            final int clickPosition = motionPosition + mFirstPosition - numHeaderViews;
+
+            if (adapter != null && mItemCount > 0 && motionPosition != INVALID_POSITION &&
+                    clickPosition < adapter.getCount() && sameWindow()) {
                 final View view = getChildAt(motionPosition); // a fix by @pboos
 
                 if (view != null) {
-                    final int clickPosition = motionPosition + mFirstPosition;
                     performItemClick(view, clickPosition, adapter.getItemId(clickPosition));
                 }
             }
